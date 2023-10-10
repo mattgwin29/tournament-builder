@@ -1,5 +1,5 @@
 function generateTemplate(tourney_name){
-    return `<h1>` + tourney_name + `</h1>
+    let lol=`<h1>` + tourney_name + `</h1>
     <main id="tournament">
         <ul class="round round-1">
             <li class="spacer">&nbsp;</li>
@@ -103,5 +103,7 @@ function generateTemplate(tourney_name){
             
             <li class="spacer">&nbsp;</li>
         </ul>		
-    </main>`
+    </main>`;
+    console.log("Setting html to " + lol);
+    $(".bracket-here").html(lol);
 }

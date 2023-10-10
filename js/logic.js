@@ -2,9 +2,9 @@ console.log("hi");
 
 let renderLogin = ()=>{
    $("#loginInfo").html(`
-<button id="clickme">Login</button>
+<button id="login_button">Login</button>
                   `);
-   $("#clickme").on("click", ()=>{
+   $("#login_button").on("click", ()=>{
      firebase.auth().signInWithRedirect(google_provider);
    })
 }
