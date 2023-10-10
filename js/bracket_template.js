@@ -1,3 +1,10 @@
+function showBracketCreator(){
+    console.log("GOT HERE");
+    $("#create-tournament-button").hide();
+    $("#current_events").hide();
+    $("#event_creator").show();
+}
+
 function generateTemplate(tourney_name){
     let lol=`<h1>` + tourney_name + `</h1>
     <main id="tournament">
