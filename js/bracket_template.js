@@ -1,3 +1,5 @@
+
+
 function showBracketCreator(){
     console.log("GOT HERE");
     $("#create-tournament-button").hide();

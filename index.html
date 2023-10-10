@@ -4,24 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CPEG470 Tournament Builder</title>
-    <link rel="stylesheet" href="./css/style.css">
-
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/10.4.0/firebase-app-compat.js"></script>
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/10.4.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/10.4.0/firebase-database-compat.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script> !-->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     <script defer src="./js/logic.js"></script>
-    <script defer src="./js/bracket_template.js"></script>
+    <!-- <script defer src="./js/bracket_template.js"></script> !-->
+    <script defer src="https://code.jquery.com/jquery-3.3.1.min.js" 
+    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" 
+    crossorigin="anonymous"></script>
+
+    <script defer src="./js/jquery.gracket.min.js"></script>
+    <script defer src="./js/jquery.gracket.js"></script>
+    <script defer src="./js/gracket.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
     <link rel="stylesheet" href="./css/cards.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/bracket.css">
+    <link rel="stylesheet" href="./css/gracket.css">
+    <!-- <link rel="stylesheet" href="./css/bracket.css"> !-->
+
+
+    
     <style>
         body, html {
           height: 100%;
@@ -52,7 +61,7 @@
           <span class="w3-text-white" style="font-size:90px">Tournament<br>Builder</span>
           <div id="loginInfo"></div>
           <!-- <button id="create-tournament" onclick="generateTemplate('test')">Create Tournament</button>  !-->   
-          <button id="create-tournament-button" onclick="showBracketCreator();">Create Tournament</button>    
+          <button id="create-tournament-button" onclick="showBracketForm()">Create Tournament</button>    
         </div>
         <div class="w3-display-bottomright w3-center w3-padding-large">
           <span class="w3-text-white">CPEG470</span>
@@ -76,8 +85,8 @@
             </div>
           </div>
 
-        <div class="bracket-here"></div>
-        <div class="w3-sand w3-grayscale w3-large">
+          <div class="my_gracket"></div>
+          <div class="w3-sand w3-grayscale w3-large">
 
           <!-- Menu Container -->
           <div class="w3-container" id="currevent">
@@ -87,12 +96,13 @@
             <div class="w3-container" id="where" style="padding-bottom:32px;">
               <div class="w3-content" style="max-width:700px">
                 <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">Create an event</span></h5>
-                <form action="/action_page.php" target="_blank">
+                <form action="/" target="_blank">
                   <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
                   <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="How many people" required name="People"></p>
                   <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date and time" required name="date" value="2020-11-16T20:00"></p>
                   <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
                   <p><button class="w3-button w3-black" type="submit">Create Event</button></p>
+                  <button onclick="showGracketCreator();">Test the bracket design</button>
                 </form>
               </div>
             </div>
@@ -129,12 +139,12 @@
             </div>
               
               <div class="card 4">
-              <div class="card_image">
-                <img src="https://media.giphy.com/media/LwIyvaNcnzsD6/giphy.gif" />
+                <div class="card_image">
+                  <img src="https://media.giphy.com/media/LwIyvaNcnzsD6/giphy.gif" />
+                  </div>
+                <div class="card_title title-black">
+                  <p>Example event 4</p>
                 </div>
-              <div class="card_title title-black">
-                <p>Example event 4</p>
-              </div>
               </div>
             </div>
         </div>
