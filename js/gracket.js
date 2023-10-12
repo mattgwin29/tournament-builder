@@ -27,6 +27,8 @@ let myData = [
     ]
   ];
 
+let myData2 = [];
+
 function showBracketForm(){
     console.log("GOT HERE");
     $("#create-tournament-button").hide();
