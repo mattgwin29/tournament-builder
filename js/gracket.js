@@ -64,6 +64,8 @@ function openCreateEventMenu(){
       </form>
     </div>
   </div>`);
+  $("#current_events").hide()
+  
 }
 
   function showGracketCreator(){

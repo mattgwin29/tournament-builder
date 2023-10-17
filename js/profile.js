@@ -12,7 +12,7 @@ let renderLogin = ()=>{
 let globalUser = null;
 
 let startApp = (user)=>{
-   $("#loginInfo").html(`<h1>Welcome ${user.displayName}!!</h1><button id="logout">Log out here</button>`);
+   $("#loginInfo").html(`<button id="logout">Log out here</button>`);
    $("#loginInfo").css({ 'color': 'white'});
    $("#logout").click(()=>{
      firebase.auth().signOut();
@@ -33,8 +33,11 @@ let startApp = (user)=>{
 
   function renderProfile(){
     $('.profile-card').html(`
-      <img src="${getProfilePhotoURL()}">
+      <img style="padding-top:100px; padding-right:20px; padding-bottom:0px; padding-left:20px" src="${getProfilePhotoURL()}">
       `);
+      console.log(globalUser);
+      $("#tourney_title").html(`<span class="w3-text-white" style="font-size:90px">Hello<br>` + globalUser.displayName + `</span>`);
+      $("#current_events").html(`<span class="w3-center" style="font-size:50px">My Events</span>`);
     }
     
   function getProfilePhotoURL(){
