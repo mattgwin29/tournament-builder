@@ -7,6 +7,7 @@ function showBracketCreator(){
     $("#event_creator").show();
 }
 
+
 function generateTemplate(tourney_name){
     let lol=`<h1>` + tourney_name + `</h1>
     <main id="tournament">
