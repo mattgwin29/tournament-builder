@@ -56,17 +56,73 @@ function openCreateEventMenu(){
       <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">Create an event</span></h5>
       <form action="/" target="_blank">
         <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
-        <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="How many people" required name="People"></p>
+        <p><input class="w3-input w3-padding-16 w3-border" id="tourney_people_count" type="number" placeholder="How many people" required name="People"></p>
         <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date and time" required name="date" ></p>
         <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
-        <p><button class="w3-button w3-black" type="submit">Create Event</button></p>
-        <button onclick="showGracketCreator();">Test the bracket design</button>
+        <p><button class="w3-button w3-black" onclick="render_gracket(10)">Create Event</button></p>
       </form>
     </div>
+    <button onclick="createInputForNames($('#tourney_people_count').val());">Test the bracket designer</button>
+    <button onclick="showGracketCreator()">Show Test Bracket</button>
   </div>`);
   $("#current_events").hide()
   
-}
+  }
+
+
+
+  function createInputForNames(amount){
+    console.log("Creating " + amount + " input boxes"); //<label class="inline-label">Name</label><label class="inline-label">Seed</label>
+    document.getElementById('bracket_creator').innerHTML += (`<div id="names_list"></div>`);
+
+    let htmlstring = ``;
+    htmlstring+=`<h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">Name and Seed </span></h5>`;
+    for (var i = 0; i < amount; i++){
+        htmlstring += `<div><p><input type="text" placeholder="Name" id="Name_ ` + i + `" ><input  type="number" placeholder="Seed"  id="Seed_` + i + `"></p>
+      `;
+      }
+      $("#Seed_" + i).val(i);
+    
+    document.getElementById('names_list').innerHTML = htmlstring;
+
+    for (var j = 0; j < amount; j++){
+      $("#Seed_" + j).val(j+1);
+
+    }
+  }
+
+
+  /*function createInputForNames(amount){
+    console.log("Creating " + amount + " input boxes"); //<label class="inline-label">Name</label><label class="inline-label">Seed</label>
+    document.getElementById('bracket_creator').innerHTML += (`<div id="names_list"></div>`);
+
+    let htmlstring = ``;
+    htmlstring+=`<h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">Name and Seed </span></h5>`;
+    for (var i = 0; i < amount / 2; i++){
+        for (var j = 0; j < 2; j++){
+          htmlstring += `<div><p><input type="text" placeholder="Name" id="Name_ ` + (i+j) + `" ><input  type="number" placeholder="Seed"  id="Seed_` + (i+j) + `"></p>
+          `;
+        }
+        htmlstring += `<div color="grey"></div>`
+
+
+      }
+      $("#Seed_" + i).val(i);
+    
+    document.getElementById('names_list').innerHTML = htmlstring;
+
+    for (var j = 0; j < amount; j++){
+      $("#Seed_" + j).val(j+1);
+
+    }
+  }*/
+
+  function renderGracket(people){
+    let slots = [];
+    for (var i =0; i < people; i++){
+      slots.push([]);
+    }
+  }
 
   function showGracketCreator(){
     $(".my_gracket").gracket({ 

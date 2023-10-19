@@ -95,13 +95,10 @@
                   <a href="https://mattgwin-tournament-builder.web.app/" class="w3-button w3-block w3-black">HOME</a>
               </div>
               <div class="w3-col s3">
-                <a  class="w3-button w3-block w3-black" onclick="renderProfile();">Profile</a>
+                <a class="w3-button w3-block w3-black" onclick="renderProfile(); window.location.href='/#profile'">Profile</a>
               </div>
               <div class="w3-col s3">
-                <a href="#currevent" class="w3-button w3-block w3-black">Current Events</a>
-              </div>
-              <div class="w3-col s3">
-                <a href="#" class="w3-button w3-block w3-black">WHERE</a>
+                <a href="https://mattgwin-tournament-builder.web.app/#currevent" v-reload  class="w3-button w3-block w3-black">Current Events</a>
               </div>
             </div>
           </div>
@@ -113,13 +110,13 @@
           <div class="w3-container" id="currevent">
           <div class="w3-content" style="max-width:700px">
             
-          <div id="event_creator">
+          <div id="event_creator"></div>
+          <div id="bracket_creator">
           </div>
 
         <div id="current_events">
           <span class="w3-center" style="font-size:50px">Current Events</span>
-          <div class="cards-list">
-            </div>
+          <div class="cards-list"></div>
         </div>
       </div>
     </div>

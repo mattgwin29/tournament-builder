@@ -9,7 +9,6 @@ function create_cards(c,  name, date, img){
             </div>`;
 }
 
-
 for (var i = 0; i < 29; i++){
     $(".cards-list").append(create_cards("card " + i, "deez nuts", null, null));
 }
