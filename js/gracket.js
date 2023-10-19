@@ -87,7 +87,6 @@ function openCreateEventMenu(){
 
     for (var j = 0; j < amount; j++){
       $("#Seed_" + j).val(j+1);
-
     }
   }
 
