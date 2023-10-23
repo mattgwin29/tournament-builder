@@ -72,13 +72,17 @@ function openCreateEventMenu(){
 
 
   function createInputForNames(amount){
+    if ((amount/2) % 2 !=0) {
+      alert("The amount of people must be a multiple of 2.");
+      return;
+    }
     console.log("Creating " + amount + " input boxes"); //<label class="inline-label">Name</label><label class="inline-label">Seed</label>
     document.getElementById('bracket_creator').innerHTML += (`<div id="names_list"></div>`);
 
     let htmlstring = ``;
     htmlstring+=`<h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">Name and Seed </span></h5>`;
     for (var i = 0; i < amount; i++){
-        htmlstring += `<div><p><input type="text" placeholder="Name" id="Name_ ` + i + `" ><input  type="number" placeholder="Seed"  id="Seed_` + i + `"></p>
+        htmlstring += `<div><p><input type="text" placeholder="Name" id="Name_` + i + `" ><input  type="number" placeholder="Seed"  id="Seed_` + i + `"></p>
       `;
       }
       $("#Seed_" + i).val(i);
@@ -87,6 +91,16 @@ function openCreateEventMenu(){
 
     for (var j = 0; j < amount; j++){
       $("#Seed_" + j).val(j+1);
+    }
+  }
+
+  function getPeopleInTourney(){
+    //var item = document.getElementById("tourney_people_count");
+    var amount = $("#tourney_people_count").val();
+    console.log(amount);
+
+    for (var i=0; i<amount; i++){
+      console.log($("#Name_" + i).val());
     }
   }
 
