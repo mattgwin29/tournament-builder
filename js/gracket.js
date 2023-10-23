@@ -63,7 +63,7 @@ function openCreateEventMenu(){
       </form>
     </div>
     <button onclick="createInputForNames($('#tourney_people_count').val());">Test the bracket designer</button>
-    <button onclick="showGracketCreator()">Show Test Bracket</button>
+    <button onclick="getPeopleInTourney()">Show Test Bracket</button>
   </div>`);
   $("#current_events").hide()
   
@@ -106,6 +106,10 @@ function openCreateEventMenu(){
 
     console.log("Running the loop until " + amount/2);
     var count = 0;
+    if (amount > 50){
+      alert("The maximum allowed number of people in a tournament is 50 ");
+      return;
+    }
     for (var i=1; i<(amount/2)+1; i++){
       for (var j = 0; j < 2; j++)
       {
@@ -113,7 +117,7 @@ function openCreateEventMenu(){
 
         console.log(count);
         var current_name = $("#Name_" + count).val();
-        var curr_object = { "name": current_name , "seed": count };
+        var curr_object = { "name": current_name , id: current_name , "seed": count };
         console.log(curr_object);
         newArr.push(curr_object);
         //curr_object["name"] = current_name;
