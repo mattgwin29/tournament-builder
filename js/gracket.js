@@ -90,18 +90,45 @@ function openCreateEventMenu(){
     document.getElementById('names_list').innerHTML = htmlstring;
 
     for (var j = 0; j < amount; j++){
+      $("#Name_" + j).val("Test" + j);
+
       $("#Seed_" + j).val(j+1);
     }
   }
 
   function getPeopleInTourney(){
+    var items = [[[]]];
     //var item = document.getElementById("tourney_people_count");
     var amount = $("#tourney_people_count").val();
     console.log(amount);
 
-    for (var i=0; i<amount; i++){
-      console.log($("#Name_" + i).val());
+    var newArr =[[]];
+
+    console.log("Running the loop until " + amount/2);
+    var count = 0;
+    for (var i=1; i<(amount/2)+1; i++){
+      for (var j = 0; j < 2; j++)
+      {
+        //console.log(((i + j) * 2) - i);
+
+        console.log(count);
+        var current_name = $("#Name_" + count).val();
+        var curr_object = { "name": current_name , "seed": count };
+        console.log(curr_object);
+        newArr.push(curr_object);
+        //curr_object["name"] = current_name;
+        newArr[0].push(newArr);
+        count++;
+      } 
+      items[0].push(newArr);
+      newArr = [[]];
     }
+
+    console.log("Logging items: ");
+    console.log(items);
+    $(".my_gracket").gracket({ 
+      src: items
+    });
   }
 
 
