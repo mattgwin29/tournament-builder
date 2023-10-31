@@ -98,8 +98,9 @@ var matchData = {
         let htmlstring = ``;
         htmlstring+=`<h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">Name and Email</span></h5>`;
         for (var i = 0; i < amount; i++){
-            htmlstring += `<div><p class="w3-center"><input type="text" placeholder="Name" id="Name_` + i + `"><input type="email" placeholder="Email"  id="Email_` + i + `"></p>
+            htmlstring += `<div><p class="w3-center"><input type="text" placeholder="Name" id="Name_` + i + `"><input type="number" placeholder="seed"  id="Seed_` + i + `"></p>
           `;
+          //htmlstring += `<div><p class="w3-center"><input type="text" placeholder="Name" id="Name_` + i + `"><input type="email" placeholder="Email"  id="Email_` + i + `"></p>
           }
           $("#Seed_" + i).val(i);
         htmlstring += `<button class="w3-button w3-black" onclick="loadBracket()">Generate Bracket</button>`;
@@ -107,9 +108,9 @@ var matchData = {
         document.getElementById('names_list').innerHTML = htmlstring;
     
         for (var j = 0; j < amount; j++){
-          $("#Name_" + j).val("Test" + j);
+          $("#Name_" + j).val("Test" + (j+1));
     
-          $("#Email_" + j).val("test@website.com");
+          $("#Seed_" + j).val((j+1));
         }
       }
 
@@ -133,7 +134,12 @@ function loadBracket(){
     for (var j = 0; j < amount/2; j++){
         var teamX = []
         for (var k = 0; k < 2; k++){
-            teamX = [...teamX ,($("#Name_" + (count)).val())];
+            if (k==0){
+                teamX = [...teamX ,($("#Name_" + (count)).val())];
+            }
+            else { //k=1
+                teamX = [...teamX ,($("#Name_" + (amount - count)).val())];
+            }
             count++;
         }
         data.teams = [...data.teams, teamX];
@@ -143,7 +149,6 @@ function loadBracket(){
         setBracketData(data);
         //$("#Email_" + j).val("test@website.com");
     }
-
   }
 
   function clearBracket(){
