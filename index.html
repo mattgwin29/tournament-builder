@@ -32,18 +32,23 @@
     integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" 
     crossorigin="anonymous"></script> -->
 
-    <script defer src="./js/jquery.gracket.min.js"></script>
-    <script defer src="./js/jquery.gracket.js"></script>
-    <script defer src="./js/gracket.js"></script>
+   <!--<script defer src="./js/jquery.gracket.min.js"></script>--> 
+    <!--<script defer src="./js/jquery.gracket.js"></script>-->
+    <!--<script defer src="./js/gracket.js"></script>-->
+
     <script defer src="./js/cards.js"></script>
+    <script defer src="./js/extra_bracket.js"></script>
     <script defer src="./js/profile.js"></script>
+
+    <script type="text/javascript" defer src="./js/jquery.bracket.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
     <link rel="stylesheet" href="./css/cards.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/gracket.css">
+    <!--<link rel="stylesheet" href="./css/gracket.css">-->
+    <link rel="stylesheet" href="./css/jquery.bracket.min.css">
     <!-- <link rel="stylesheet" href="./css/bracket.css"> !-->
 
 
@@ -66,60 +71,73 @@
         }
     </style>
 
-    </head>
-    <body>
+  </head>
+  <body>
 
-      <header class="bgimg w3-display-container w3-grayscale-min" id="home">
-        <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
-          <span class="w3-tag">Created by Matt Gwin</span>
-        </div>
+    <header class="bgimg w3-display-container w3-grayscale-min" id="home">
+      <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
+        <span class="w3-tag">Created by Matt Gwin</span>
+      </div>
 
-        <div id="tourney_title" class="w3-display-middle w3-center">
-          <span class="w3-text-white" style="font-size:90px">Tournament<br>Builder</span>
+      <div id="tourney_title" class="w3-display-middle w3-center">
+        <span class="w3-text-white" style="font-size:90px">Tournament<br>Builder</span>
 
-          <div id="loginInfo"></div>
-          <!-- <button id="create-tournament" onclick="generateTemplate('test')">Create Tournament</button>  !-->   
-          <button id="create-tournament-button" onclick="openCreateEventMenu()">Create Tournament</button>    
-        </div>
+        <div id="loginInfo"></div>
+        <!-- <button id="create-tournament" onclick="generateTemplate('test')">Create Tournament</button>  !-->   
+        <!--<button id="create-tournament-button" onclick="openCreateEventMenu()">Create Tournament</button> -->
+        <button id="create-tournament-button" onclick="openCreateEventMenu()">Create Tournament</button>    
+      </div>
 
-        <div class="profile-card"></div>
+      <div class="profile-card"></div>
 
-        <div class="w3-display-bottomright w3-center w3-padding-large">
-          <span class="w3-text-white">CPEG470</span>
-        </div>
-      </header>
+      <div class="w3-display-bottomright w3-center w3-padding-large">
+        <span class="w3-text-white">CPEG470</span>
+      </div>
+    </header>
 
-      <div class="w3-top">
-          <div class="w3-row w3-padding w3-black">
-              <div class="w3-col s3">
-                  <a href="https://mattgwin-tournament-builder.web.app/" class="w3-button w3-block w3-black">HOME</a>
-              </div>
-              <div class="w3-col s3">
-                <a class="w3-button w3-block w3-black" onclick="renderProfile(); window.location.href='/#profile'">Profile</a>
-              </div>
-              <div class="w3-col s3">
-                <a href="https://mattgwin-tournament-builder.web.app/#currevent" v-reload  class="w3-button w3-block w3-black">Current Events</a>
-              </div>
-            </div>
+    <div class="w3-top">
+      <div class="w3-row w3-padding w3-black">
+          <div class="w3-col s3">
+              <a href="https://mattgwin-tournament-builder.web.app/" class="w3-button w3-block w3-black">HOME</a>
           </div>
-
-          <div class="my_gracket"></div>
-          <div class="w3-sand w3-grayscale w3-large">
-
-          <!-- Menu Container -->
-          <div class="w3-container" id="currevent">
-          <div class="w3-content" style="max-width:700px">
-            
-          <div id="event_creator"></div>
-          <div id="bracket_creator">
+          <div class="w3-col s3">
+            <a class="w3-button w3-block w3-black" onclick="renderProfile(); window.location.href='/#profile'">Profile</a>
           </div>
-
-        <div id="current_events">
-          <span class="w3-center" style="font-size:50px">Current Events</span>
-          <div class="cards-list"></div>
+          <div class="w3-col s3">
+            <a href="https://mattgwin-tournament-builder.web.app/#currevent" v-reload  class="w3-button w3-block w3-black">Current Events</a>
+          </div>
         </div>
       </div>
+
+        
+      <div class="w3-sand w3-grayscale w3-large"> 
+
+        
+
+        <!-- Menu Container -->
+        <div class="w3-container" id="currevent">
+        <div class="w3-content" style="max-width:700px">
+        <div id="event_creator"></div>
+        <div id="bracket_creator"></div>
+
+
     </div>
+
+    </div>    
+  </div>    
+
+
+
+    
+    <div id="current_events">
+      <span class="w3-center" style="font-size:50px">Current Events</span>
+      <div class="cards-list"></div>
+    </div>
+    <div id="bracket_holder">
+    </div>
+    <!--<div class="my_gracket"></div>-->
+
+    <!--</div>-->
     <script>
       // Tabbed Menu
       function openMenu(evt, menuName) {

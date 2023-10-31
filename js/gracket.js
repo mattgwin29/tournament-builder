@@ -69,8 +69,6 @@ function openCreateEventMenu(){
   
   }
 
-
-
   function createInputForNames(amount){
     if ((amount/2) % 2 !=0) {
       alert("The amount of people must be a multiple of 2.");
@@ -115,10 +113,10 @@ function openCreateEventMenu(){
       {
         //console.log(((i + j) * 2) - i);
 
-        console.log(count);
+        //console.log(count);
         var current_name = $("#Name_" + count).val();
         var curr_object = { "name": current_name , id: current_name , "seed": count };
-        console.log(curr_object);
+        //console.log(curr_object);
         newArr.push(curr_object);
         //curr_object["name"] = current_name;
         newArr[0].push(newArr);
@@ -128,10 +126,31 @@ function openCreateEventMenu(){
       newArr = [[]];
     }
 
-    console.log("Logging items: ");
-    console.log(items);
+    //round 1
+
+    //console.log("Logging items: ");
+    //console.log(items);
     $(".my_gracket").gracket({ 
       src: items
+    });
+
+    //round 2
+    var round2 = [...items];
+    //console.log(round2);
+    for (var index = 0; index < round2[0].length; index++){
+      console.log(round2[0][index]);
+
+      /*for (var inside = 0; inside < round2[0][index].length; inside++){
+         //round2[0][inside][0].pop();
+      }*/
+
+      //var items2 = items.map();
+    }
+    items.push(round2[0]);
+    //console.log(items);
+  
+    $(".my_gracket").gracket({ 
+      src: round2
     });
   }
 
