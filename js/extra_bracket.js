@@ -2,71 +2,6 @@
 
 var dataTemplate = {teams: [], results: [[]]}
 
-var matchData = {
-    teams : [
-      ["Team 1", "Team 2"],
-      ["Team 3", "Team 4"],
-      ["Team 5", "Team 6"],
-      ["Team 7", "Team 8"],
-    ],
-    results : [
-      //first round - last 16
-      [
-        [4,3,'Match 1'], 
-        [1,4,'Match 2'], 
-        [1,4,'Match 3'], 
-        [1,4,'Match 4'], 
-      ],
-      //second round - Quarter Final
-       [
-        [4,3,'Match 9'], 
-        [1,4,'Match 10'], 
-      ],
-      //third round - Semi Final
-       [
-        [1,4,'Match 14']
-      ],
-      //fourth round - Final
-       [
-        [], //winners
-        [1,4,'Match 16'] //third place
-      ]
-    ]
-  }
-  
-  /*var matchBlankData = {
-    teams : [
-      ["Open Slot", "Open Slot"],
-      ["Open Slot", "Team 4"],
-      ["Team 5", "Team 6"],
-      ["Team 7", "Team 8"],
-    ],
-    results : [
-      //first round - last 16
-      [
-        [4,3,'Match 1'], 
-        [1,4,'Match 2'], 
-        [1,4,'Match 3'], 
-        [1,4,'Match 4'], 
-      ],
-      //second round - Quarter Final
-       [
-        [4,3,'Match 9'], 
-        [1,4,'Match 10'], 
-      ],
-      //third round - Semi Final
-       [
-        [1,4,'Match 14']
-      ],
-      //fourth round - Final
-       [
-        [], //winners
-        [1,4,'Match 16'] //third place
-      ]
-    ]
-  }*/
-
-
   function openCreateEventMenu(){
     console.log("Got in here");
     $("#event_creator").html(`
@@ -104,7 +39,9 @@ var matchData = {
           }
           $("#Seed_" + i).val(i);
           htmlstring += `<div class="w3-center"><button class="w3-button w3-black" onclick="loadBracket(false)">Generate Perfect Bracket</button>
-          <button class="w3-button w3-black" onclick="loadBracket(true)">Generate Random Bracket</button></div>`;
+          <button class="w3-button w3-black" onclick="loadBracket(true)">Generate Random Bracket</button>
+          <button class="w3-button w3-black" onclick="clearBracket()">Clear Current</button></div> `;
+          
 
         document.getElementById('names_list').innerHTML = htmlstring;
     
@@ -113,6 +50,7 @@ var matchData = {
     
           $("#Seed_" + j).val((j+1));
         }
+        window.location.href = '#names_list';
       }
 
     
@@ -124,7 +62,8 @@ function loadBracket(random){
     <div id="matches">
       <div class="demo">
       </div>
-    </div>`);
+    </div>
+    `);
 
     data = {...dataTemplate};
     if (random){
@@ -152,13 +91,14 @@ function loadBracket(random){
 
         setBracketData(data);
     }
+    window.location.href= "#finalize_event";
+    $("#finalize_event").html(`<div class="w3-center"><button class="w3-button w3-black" onclick="()">Create Event</button></div>`);
 
   }
 
   function setResults(data, amount, random){
     console.log("ARGH ME MATEY " + amount);
     if ( Number.isNaN(amount)) return;
-    if (Math.ceil(amount) === 1) console.log("THE AMOUNT IS ONE");
 
     for (var k1 = 0; k1 < Math.ceil(getBaseLog(2, amount)); k1++){
         data.results = [...data.results, []];
@@ -194,12 +134,6 @@ function loadBracket(random){
           /*onMatchClick: onclick,
           onMatchHover: onhover*/
         })
-        
-        /*$('#matchesblank .demo').bracket({
-          init: matchBlankData,
-          onMatchClick: onclick,
-          onMatchHover: onhover
-        })*/
       })
   }
 
@@ -207,7 +141,6 @@ function loadBracket(random){
     var items = [];
     //var item = document.getElementById("tourney_people_count");
     var amount = $("#tourney_people_count").val();
-    //console.log(amount);
 
     var newArr =[[]];
 
@@ -235,11 +168,6 @@ function loadBracket(random){
     }
     $("#round_holder").html(htmlstring);
 }
-
-  /*function createRandomBracket(){
-
-  }*/
-
 
   function getBaseLog(base, y) {
     return Math.log(y) / Math.log(base);
