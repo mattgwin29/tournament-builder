@@ -1,6 +1,6 @@
 //https://codepen.io/meriawep/pen/ExaqNvd
 
-var dataTemplate = {teams: [], results: []}
+var dataTemplate = {teams: [], results: [[]]}
 
 var matchData = {
     teams : [
@@ -103,7 +103,8 @@ var matchData = {
           //htmlstring += `<div><p class="w3-center"><input type="text" placeholder="Name" id="Name_` + i + `"><input type="email" placeholder="Email"  id="Email_` + i + `"></p>
           }
           $("#Seed_" + i).val(i);
-        htmlstring += `<button class="w3-button w3-black" onclick="loadBracket()">Generate Bracket</button>`;
+          htmlstring += `<div class="w3-center"><button class="w3-button w3-black" onclick="loadBracket(false)">Generate Perfect Bracket</button>
+          <button class="w3-button w3-black" onclick="loadBracket(true)">Generate Random Bracket</button></div>`;
 
         document.getElementById('names_list').innerHTML = htmlstring;
     
@@ -115,7 +116,7 @@ var matchData = {
       }
 
     
-function loadBracket(){
+function loadBracket(random){
     clearBracket();
     let amount = $('#tourney_people_count').val();
     console.log("Got in here?");
@@ -123,13 +124,18 @@ function loadBracket(){
     <div id="matches">
       <div class="demo">
       </div>
-    </div>
-    <div id="matchesblank">
-      <div class="demo">
-      </div>
     </div>`);
 
     data = {...dataTemplate};
+    if (random){
+        setResults(data, amount, true);
+    }
+    else{
+        setResults(data, amount, false);
+    }
+    setResults(data, amount);
+    data.results[0] = [...data.results[0], [1,0]];
+
     var count = 0;
     for (var j = 0; j < amount/2; j++){
         var teamX = []
@@ -143,11 +149,37 @@ function loadBracket(){
             count++;
         }
         data.teams = [...data.teams, teamX];
-        //$("#Name_" + j).val("Test" + j);
-        
-        console.log(data.teams);
+
         setBracketData(data);
-        //$("#Email_" + j).val("test@website.com");
+    }
+
+  }
+
+  function setResults(data, amount, random){
+    console.log("ARGH ME MATEY " + amount);
+    if ( Number.isNaN(amount)) return;
+    if (Math.ceil(amount) === 1) console.log("THE AMOUNT IS ONE");
+
+    for (var k1 = 0; k1 < Math.ceil(getBaseLog(2, amount)); k1++){
+        data.results = [...data.results, []];
+        for (var i = 0; i < amount / 2; i++){
+            if (random){
+                var firstScore = Math.floor(Math.random() * 10);
+                var secondScore = Math.floor(Math.random() * 10);
+                if (firstScore === secondScore){
+                    console.log("Uh oh, collision!");
+                    while(firstScore === secondScore){
+                        console.log("first score " + firstScore);
+                        console.log("second score " + secondScore);
+                        secondScore = Math.floor(Math.random() * 10);
+                    }
+                }
+                data.results[k1] = [...data.results[k1], [firstScore, secondScore]];
+            }
+            else {
+                data.results[k1] = [...data.results[k1], [10,0]];
+            }
+        }
     }
   }
 
@@ -158,9 +190,9 @@ function loadBracket(){
   function setBracketData(data){
     $(function() {
         $('#matches .demo').bracket({
-          init: data,
-          onMatchClick: onclick,
-          onMatchHover: onhover
+          init: data
+          /*onMatchClick: onclick,
+          onMatchHover: onhover*/
         })
         
         /*$('#matchesblank .demo').bracket({
@@ -175,7 +207,7 @@ function loadBracket(){
     var items = [];
     //var item = document.getElementById("tourney_people_count");
     var amount = $("#tourney_people_count").val();
-    console.log(amount);
+    //console.log(amount);
 
     var newArr =[[]];
 
