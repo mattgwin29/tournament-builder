@@ -24,14 +24,14 @@ var dataTemplate = {teams: [], results: [[]]}
     function createInputForNames(){
         let amount = $('#tourney_people_count').val();
         if ((amount/2) % 2 !=0) {
-          alert("The amount of people must be a multiple of 2.");
+          alert("The amount of people must be a power of 2.");
           return;
         }
         console.log("Creating " + amount + " input boxes"); //<label class="inline-label">Name</label><label class="inline-label">Seed</label>
         document.getElementById('bracket_creator').innerHTML += (`<div id="names_list"></div>`);
     
         let htmlstring = ``;
-        htmlstring+=`<h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">Name and Email</span></h5>`;
+        htmlstring+=`<h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">Name and Seed</span></h5>`;
         for (var i = 0; i < amount; i++){
             htmlstring += `<div><p class="w3-center"><input type="text" placeholder="Name" id="Name_` + i + `"><input type="number" placeholder="seed"  id="Seed_` + i + `"></p>
           `;
@@ -46,7 +46,7 @@ var dataTemplate = {teams: [], results: [[]]}
         document.getElementById('names_list').innerHTML = htmlstring;
     
         for (var j = 0; j < amount; j++){
-          $("#Name_" + j).val("Test" + (j+1));
+          $("#Name_" + j).val("Person " + (j+1));
     
           $("#Seed_" + j).val((j+1));
         }
@@ -92,8 +92,15 @@ function loadBracket(random){
         setBracketData(data);
     }
     window.location.href= "#finalize_event";
-    $("#finalize_event").html(`<div class="w3-center"><button class="w3-button w3-black" onclick="()">Create Event</button></div>`);
 
+    $("#finalize_event").html(`<div class="w3-center"><button class="w3-button w3-black" onclick="pushTournamentToFirebase(data)">Create Event</button></div>`);
+  }
+
+  async function pushTournamentToFirebase(json_data){
+    var data = JSON.stringify(json_data);
+    console.log(data);
+    firebase.database().ref("/tournaments").push(data);
+    //window.location.href = "/";
   }
 
   function setResults(data, amount, random){
