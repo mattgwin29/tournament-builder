@@ -1,4 +1,3 @@
-console.log("hi");
 
 let renderLogin = ()=>{
    $("#loginInfo").html(`

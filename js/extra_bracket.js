@@ -1,6 +1,6 @@
 //https://codepen.io/meriawep/pen/ExaqNvd
 
-var dataTemplate = {teams: [], results: [[]]}
+var dataTemplate = {teams: [], results: [[]], name: "", date: "", notes: ""}
 
   function openCreateEventMenu(){
     console.log("Got in here");
@@ -9,10 +9,10 @@ var dataTemplate = {teams: [], results: [[]]}
       <div class="w3-content" style="max-width:700px">
         <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">Create an event</span></h5>
         <form action="/" target="_blank">
-          <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
+          <p><input class="w3-input w3-padding-16 w3-border" id="tournament_name" type="text" placeholder="Name" required name="Name"></p>
           <p><input class="w3-input w3-padding-16 w3-border" id="tourney_people_count" type="number" placeholder="How many people" required name="People"></p>
-          <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date and time" required name="date" ></p>
-          <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
+          <p><input class="w3-input w3-padding-16 w3-border" id="tournament_date" type="datetime-local" placeholder="Date and time" required name="date" ></p>
+          <p><input class="w3-input w3-padding-16 w3-border" id="tournament_notes" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
         </form>
       </div>
       <p><button class="w3-button w3-black" onclick="createInputForNames();">Next</button></p>
@@ -88,19 +88,24 @@ function loadBracket(random){
             count++;
         }
         data.teams = [...data.teams, teamX];
-
+        data.name = $("#tournament_name").val();
+        data.date = moment(new Date($("#tournament_date").val())).format('dddd MMMM D Y');
+        data.notes = $("#tournament_notes").val();
         setBracketData(data);
     }
-    window.location.href= "#finalize_event";
+    //window.location.href= "#finalize_event";
 
     $("#finalize_event").html(`<div class="w3-center"><button class="w3-button w3-black" onclick="pushTournamentToFirebase(data)">Create Event</button></div>`);
   }
 
-  async function pushTournamentToFirebase(json_data){
+  function pushTournamentToFirebase(json_data){
     var data = JSON.stringify(json_data);
     console.log(data);
     firebase.database().ref("/tournaments").push(data);
+    alert("Successfully Created Event!");
+    //window.location.reload();
     //window.location.href = "/";
+
   }
 
   function setResults(data, amount, random){
