@@ -27,6 +27,12 @@ var dataTemplate = {teams: [], results: [[]], name: "", date: "", notes: ""}
           alert("The amount of people must be a power of 2.");
           return;
         }
+
+        if (amount > 64){
+          alert("The maximum allowed number of people in a tournament is 64 ");
+          return;
+        }
+
         console.log("Creating " + amount + " input boxes"); //<label class="inline-label">Name</label><label class="inline-label">Seed</label>
         document.getElementById('bracket_creator').innerHTML += (`<div id="names_list"></div>`);
     
@@ -101,11 +107,10 @@ function loadBracket(random){
   function pushTournamentToFirebase(json_data){
     var data = JSON.stringify(json_data);
     console.log(data);
-    firebase.database().ref("/tournaments").push(data);
-    alert("Successfully Created Event!");
-    //window.location.reload();
-    //window.location.href = "/";
-
+    firebase.database().ref("/tournaments").push(data).then(function() {
+      alert("Successfully Created Event!");
+      window.location = "./";
+    });
   }
 
   function setResults(data, amount, random){
@@ -153,7 +158,6 @@ function loadBracket(random){
     var items = [];
     //var item = document.getElementById("tourney_people_count");
     var amount = $("#tourney_people_count").val();
-
     var newArr =[[]];
 
     console.log("Running the loop until " + amount/2);
